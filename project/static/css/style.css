@@ -165,3 +165,7 @@ a {
 .btn-spacing {
   margin-right: 10px;
 }
+
+.image-display {
+  display: none;
+}

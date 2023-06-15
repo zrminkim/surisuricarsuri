@@ -30,12 +30,7 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-                <h3 class="float-md-start mb-0">Cover</h3>
-                <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
-                <nav>
+                <h3 class="float-md-start mb-0">차량이 긁히거나 파손이 있을경우 사진 한장으로 간단하게 예상 견적서를 확인해보세요!</h3>
             </div>
         </header>
         <div>
@@ -56,14 +51,17 @@
             <h2>차량 모델을 선택해주세요!</h2>
             <div id="detail_model"></div>
 
-            <div>
+            <div class="image-display">
                 <form name="image-up" method="post" enctype="multipart/form-data">
-                    <input id="input_image" type="file" class="bi bi-images real-upload" accept="image/*" multiple>
+                    <input id="input_image" type="file" class="bi bi-images" accept="image/*" multiple>
                     {% comment %} <button type="button" class="upload">사진을 첨부해주세요</button> {% endcomment %}
                     {% comment %} <input id="input_image" type="file" id="real-up" class="real-upload" accept="image/*" multiple> {% endcomment %}
                     <div class="upload"></div>
-                    <ul class="image-preview"></ul>
+
+                    <div class="image-preview"></div>
+
                     <div class="data_file_txt" id="data_file_txt" style="margin:40px"><br/></div>
+                    <button class="save-button">Save</button>
                 </form>
                 
                 <h2>위의 차량이 선택한 차량이 맞습니까?</h2>

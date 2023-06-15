@@ -57,13 +57,14 @@ $(document).ready(function () {
                 // 자동차 모델 클릭시 자동차 상세 모델 종류 버튼 생성
                 const car_detail = document.getElementById('detail_model');
                 data.forEach(item => {
-                    const button_detail = document.createElement('button');
+                    const detail = document.createElement('button');
                     
-                    button_detail.className = "btn btn-warning btn-spacing";
-                    button_detail.id = item.pk;
-                    button_detail.value = item.fields.detail_name;
-                    button_detail.textContent = item.fields.detail_name;
-                    car_detail.appendChild(button_detail);
+                    detail.className = "btn btn-warning btn-spacing";
+                    detail.id = item.pk;
+                    detail.value = item.fields.detail_name;
+                    detail.textContent = item.fields.detail_name;
+                    detail.setAttribute('name', 'detail');
+                    car_detail.appendChild(detail);
                 });
 
             },
@@ -76,3 +77,4 @@ $(document).ready(function () {
         })
     });
 });
+

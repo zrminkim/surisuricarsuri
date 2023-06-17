@@ -36,7 +36,7 @@
         <div>
             <h1>carsuri</h1><br/>
 
-            <div>
+            <div class="fade-in-box">
                 <h2>제조사를 선택해주세요!</h2>
                 {% if maker %}
                 {% for m in maker %}
@@ -45,28 +45,30 @@
                 {% endif %}
             </div>
             
-            <h2>차종을 선택해주세요!</h2>
-            <div id="model"></div>
+                <h2>차종을 선택해주세요!</h2>
+                <div id="model"></div>
             
             <h2>차량 모델을 선택해주세요!</h2>
             <div id="detail_model"></div>
 
-            <div class="image-display">
-                <form name="image-up" method="post" enctype="multipart/form-data">
-                    <input id="input_image" type="file" class="bi bi-images" accept="image/*" multiple>
+            {% comment %} <div class="image-display"> {% endcomment %}
+            <div>
+                <form id="image-up" name="image-up" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <input id="input_image" name="image" onchange='getImageFiles(event)' type="file" class="real-upload" accept="image/*" multiple>
                     {% comment %} <button type="button" class="upload">사진을 첨부해주세요</button> {% endcomment %}
                     {% comment %} <input id="input_image" type="file" id="real-up" class="real-upload" accept="image/*" multiple> {% endcomment %}
                     <div class="upload"></div>
 
                     <div class="image-preview"></div>
-
-                    <div class="data_file_txt" id="data_file_txt" style="margin:40px"><br/></div>
-                    <button class="save-button">Save</button>
+                    {% comment %} <input type="submit" class="save-button"> {% endcomment %}
+                    {% comment %} <div class="data_file_txt" id="data_file_txt" style="margin:40px"><br/></div> {% endcomment %}
                 </form>
-                
+            </div>
+            <div class="yes-no-display">
                 <h2>위의 차량이 선택한 차량이 맞습니까?</h2>
                 <button class="btn btn-success" id="yes">예</button>&nbsp;
                 <button class="btn btn-success" id="no">아니오</button>&nbsp;
+                <button class="save-button">Save</button>
             </div>
         </div>
 

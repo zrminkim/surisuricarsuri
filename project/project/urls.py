@@ -9,5 +9,7 @@ urlpatterns = [
 
     path('', views.MainFunc),
     path('model/', views.ModelFunc),
-    path('detail/', views.DetailFunc)
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('detail/', views.DetailFunc),
+    # path('upload/', views.UploadImage),
+    path('predict/', views.predict_images)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

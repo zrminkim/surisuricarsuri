@@ -3,6 +3,8 @@ $(document).ready(function () {
     $("button[name='maker']").click(function () {
         let makerId = $(this).attr('id');
         $('#model').empty();
+        $('#detail_model').empty();
+        // $("#image-up").empty();
         $.ajax({
             type: "GET", // GET, POST
             url: "model", // 데이터를 전달할 url
@@ -18,19 +20,22 @@ $(document).ready(function () {
 
                 // 제조사 클릭시 제조사에 해당하는 자동차 종류 버튼 생성
                 const car_model = document.getElementById('model');
-                data.forEach((item, index) => {
+                car_model.innerHTML = '';
+                // 기존 버튼 지우기
+                data.forEach(item => {
                     const button = document.createElement('button');
-                    button.className = "btn btn-danger btn-spacing";
+                    button.className = "btn btn-danger btn-spacing fade-in-box";
                     button.id = item.pk;
                     button.value = item.fields.model_name;
                     button.textContent = item.fields.model_name;
                     button.setAttribute('name', 'model');
                     car_model.appendChild(button);
                 });
-
+                // 새 버튼에 페이드 인 효과 적용
+                $('.fade-in-box').fadeIn();
             },
-            error: function () { // 에러 발생시
-                alert("젠장!")
+            error: function (error) { // 에러 발생시
+                alert(error)
             },
             complete: function () { // ajax 통기 끝났을 때
                 // alert('끝')
@@ -38,6 +43,7 @@ $(document).ready(function () {
         })
     });
 
+    // Model ID
     $(document).on('click', '#model button', function() {
         let modelId = $(this).attr('id');
         $('#detail_model').empty();
@@ -56,20 +62,23 @@ $(document).ready(function () {
 
                 // 자동차 모델 클릭시 자동차 상세 모델 종류 버튼 생성
                 const car_detail = document.getElementById('detail_model');
+                car_detail.innerHTML = ''; // 이전 버튼 지우기
+
                 data.forEach(item => {
                     const detail = document.createElement('button');
                     
-                    detail.className = "btn btn-warning btn-spacing";
+                    detail.className = "btn btn-warning btn-spacing fade-in-box";
                     detail.id = item.pk;
                     detail.value = item.fields.detail_name;
                     detail.textContent = item.fields.detail_name;
                     detail.setAttribute('name', 'detail');
                     car_detail.appendChild(detail);
                 });
-
+                // 새 버튼에 페이드 인 효과 적용
+                $('.fade-in-box').fadeIn();
             },
-            error: function () { // 에러 발생시
-                alert("젠장!")
+            error: function (error) { // 에러 발생시
+                alert(error)
             },
             complete: function () { // ajax 통기 끝났을 때
                 // alert('끝')

@@ -1,12 +1,12 @@
-
-
 // 이미지 업로드
 function getImageFiles(e) {
-    // const uploadFiles = [];
-    // const files = e.target.files;
-    const uploadFiles = e.target.files;
+    $('.yes-no-display').show();
+    const uploadFiles = [];
+    const files = e.target.files;
     const $imagePreview = $('.image-preview');
-    if (uploadFiles.length >= 7) {
+    
+    if (files.length + $imagePreview.children().length > 6) {
+    // if (uploadFiles.length >= 7) {
         alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
         return;
     }
@@ -19,27 +19,34 @@ function getImageFiles(e) {
         }
     
         // 파일 갯수 검사
-        if (uploadFiles.length < 7) {
-            uploadFiles.push(file);
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const preview = createJQueryElement(e, file);
-                $imagePreview.append(preview);
-            };
-            reader.readAsDataURL(file);
+        // if (files.length < 7) {
+        if ($imagePreview.children().length >= 6) {
+            alert('최대 6개의 이미지만 업로드가 가능합니다.');
+            return;
         }
+        uploadFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const preview = createJQueryElement(e, file);
+            $imagePreview.append(preview);
+        };
+        reader.readAsDataURL(file);
     });
+    
 }
 
 function createJQueryElement(e, file) {
-    const $li = $('<div>').addClass('image-li');
-    const $img = $('<img>').attr('src', e.target.result);
-    const $fileName = $('<span>').text(file.name);
+    const $container = $('<div>').addClass('image-container');
+    const $img = $('<img>', {
+        'src': e.target.result,
+        'data-file':file.name
+    });
+    const $fileName = $('<span>').text(file.name).addClass('file-name');
 
-    $li.append($img);
-    $li.append($fileName);
+    $container.append($img);
+    $container.append($fileName);
 
-    return $li;
+    return $container;
 }
 $(document).ready(function () {
     // 동적으로 생성된 버튼에 이미지 업로드 기능 첨부
@@ -49,32 +56,30 @@ $(document).ready(function () {
         $('.image-display').show();
 
         // 동적으로 이미지 업로드 버튼 생성
-        const $uploadBtn = $('<input>')
-            .attr({
-                type: 'file',
-                class: 'bi bi-images real-upload',
-                accept: 'image/*',
-                multiple: true
-            })
-            .on('change', getImageFiles);
+        // const $uploadBtn = $('<input>')
+        //     .attr({
+        //         name: 'image',
+        //         type: 'file',
+        //         class: 'real-upload',
+        //         accept: 'image/*',
+        //         multiple: true
+        //     })
+        //     .on('change', getImageFiles);
 
-            // 컨테이너에 이미지 업로드 버튼 추가
-            $('#detail_model').append($uploadBtn);
+        //     // 컨테이너에 이미지 업로드 버튼 추가
+        //     $('#detail_model').append($uploadBtn);
     });
 
     // 저장 버튼 클릭 이벤트 핸들러
     $('.save-button').on('click', function(){
         const uploadedImages = $('.image-preview .image-container');
-
         if(uploadedImages.length === 0){
             alert('업로드 된 이미지가 없습니다.');
             return;
+        }
+        else{
+            const form = $("#image-up");
+            form.submit();
         };
     });
 });
-// const $realUpload = $('.real-upload');
-// const $upload = $('.upload');
-
-// $upload.on('click', () => $realUpload.click());
-
-// $realUpload.on('change', getImageFiles);

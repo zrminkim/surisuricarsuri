@@ -55,23 +55,38 @@ img {
   height: 200px;
 }
 
-.real-upload {
+/* .real-upload {
   display: none;
-}
+} */
 
-.upload {
+/* .upload {
   width: 200px;
   height: 200px;
   background-color: rgb(255, 255, 255);
-}
+} */
 
-.image-preview {
+/* .image-preview {
   width: 1300px;
   height: 200px;
   background-color: aquamarine;
   display: flex;
   gap: 20px;
+} */
+
+.image-preview {
+  width: 660px;
+  height: 200px;
+  display: flex;
+  gap: 20px;
 }
+
+/* .image-preview div.row-1 {
+
+}
+
+.image-preview div.row-2 {
+
+} */
 
 /* 스크롤바 */
 @font-face {
@@ -162,10 +177,40 @@ a {
     color: #42b983;
 }
 
+/* 버튼에 간격주기 */
 .btn-spacing {
   margin-right: 10px;
 }
 
+/* 안보임 */
 .image-display {
   display: none;
+}
+
+.yes-no-display {
+  display: none;
+}
+
+/* fade-in Animation */
+.fade-in-box {
+  display: inline-block;
+  padding: 10px;
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+@keyframes fadein {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
 }

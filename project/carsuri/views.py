@@ -100,3 +100,6 @@ def DetailFunc(request):
 
 def process_image(image_file):
     return image_file
+
+def index(request):
+    return render(request, 'bootstrap/index.html')

@@ -28,17 +28,133 @@
 <body>
     <div id="predict"></div>
 
-    <h1>Prediction Results</h1>
+    <div class="container estimate-container">
 
     <ul>
         {% for record in results %}
             <li>
-                <strong>Image Name:</strong> {{ record.imgname }}<br>
+                <img src="media/images/{{ record.imgname }}"><br>
                 <strong>Part:</strong> {{ record.part }}<br>
                 <strong>Repair:</strong> {{ record.repair }}
             </li>
             <br>
         {% endfor %}
     </ul>
+
+        <div class="estimate-header">
+            <h2>견적서</h2>
+            <p>고객님의 차량 수리 견적서입니다.</p>
+        </div>
+
+        <table class="table estimate-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>부품/작업</th>
+                    <th>수량</th>
+                    <th>단가</th>
+                    <th>금액</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">수리</td>
+                    <td>후드 판금</td>
+                    <td>1</td>
+                    <td>300,000</td>
+                    <td>300,000</td>
+                </tr>
+                <tr>
+                    <td>앞범퍼 판금</td>
+                    <td>1</td>
+                    <td>200,000</td>
+                    <td>200,000</td>
+                </tr>
+                <tr>
+                    <td>운전석 도어 판금</td>
+                    <td>1</td>
+                    <td>250,000</td>
+                    <td>250,000</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">교체</td>
+                    <td>후드 교체</td>
+                    <td>1</td>
+                    <td>150,000</td>
+                    <td>150,000</td>
+                </tr>
+                <tr>
+                    <td>앞범퍼 교체</td>
+                    <td>1</td>
+                    <td>100,000</td>
+                    <td>100,000</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="total-price">총 가격: <span>1,000,000</span>원</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
+
+<style>
+    .estimate-container {
+        background-color: #f8f9fa;
+        padding: 50px;
+    }
+
+    .estimate-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .estimate-header h2 {
+        color: #343a40;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .estimate-header p {
+        color: #868e96;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .estimate-table {
+        width: 100%;
+        margin-bottom: 30px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    .estimate-table thead th {
+        background-color: #f1f3f5;
+        color: #495057;
+        border-color: #dee2e6;
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .estimate-table tbody td {
+        color: #343a40;
+        border-color: #dee2e6;
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .total-price {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+
+    .total-price span {
+        font-size: 20px;
+        color: #343a40;
+    }
+</style>
+
 <html>

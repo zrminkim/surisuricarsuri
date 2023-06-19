@@ -72,7 +72,7 @@
     <ul>
         {% for record in results %}
             <li>
-                <img src="media/images/{{ record.imgname }}"><br>
+                <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
                 <strong>Part:</strong> {{ record.part }}<br>
                 <strong>Repair:</strong> {{ record.repair }}
             </li>

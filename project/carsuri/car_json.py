@@ -1,4 +1,4 @@
-def process_results(results):
+def process_results(results, folder_name):
     class_mapping = {
         'Front_bumper_c': {'part': '범퍼', 'repair': '교환'},
         'Front bumper_s': {'part': '범퍼', 'repair': '수리'},
@@ -16,7 +16,8 @@ def process_results(results):
         repair = part_repair.get('repair', '')
 
         processed_results.append({
-            'imgname': imgname,
+            'folder_name' : folder_name,
+            'imgname': imgname, 
             'part': part,
             'repair': repair
         })

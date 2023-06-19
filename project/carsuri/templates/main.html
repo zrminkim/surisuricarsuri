@@ -65,7 +65,6 @@
     <script defer src="static/js/image_upload.js"></script>
     <script defer src="static/js/button.js"></script>
 </head>
-</head>
 
 <body>
     <!-- Spinner Start -->
@@ -205,7 +204,7 @@
                 <div id="model"></div>
             </div>
 
-            <div class="fade-in-detail" id="detail_hide">
+            <div class="fade-in-detail buttons" id="detail_hide">
                 <h2>차량 모델을 선택해주세요!</h2>
                 <div id="detail_model"></div>
             </div>
@@ -213,17 +212,16 @@
             {% comment %} <div class="image-display"> {% endcomment %}
             <div class="fade-in-image" id="image_up_hide">
                 <form id="image-up" name="image-up" method="post" enctype="multipart/form-data">{% csrf_token %}
-                    <label class="img-btn-16" for="input_image"></label>
-                        <input id="input_image" name="image" onchange='getImageFiles(event)' type="file" class="real-upload" accept="image/*" multiple>
+                    <label class="img-btn-16" for="input_image">사진 첨부하기</label>
+                        <input id="input_image" name="image" onchange='getImageFiles(event)' type="file" class="img-input" accept="image/*" multiple>
                     <div class="upload"></div>
                     <div class="image-preview"></div>
-                </form>
+                </form><br/>
             </div>
             <div class="yes-no-display">
                 <h2>위의 차량이 선택한 차량이 맞습니까?</h2>
-                <button class="button button-first" id="yes" data-type="square">예</button>&nbsp;
-                <button class="button button-second" id="no" data-type="circle">아니오</button>&nbsp;
-                <button class="save-button">Save</button>
+                <button class="button button-first" id="btn_yes" data-type="square">예</button>&nbsp;
+                <button class="button button-second" id="btn_no" data-type="circle">아니오</button>&nbsp;
             </div>
         </div>
 

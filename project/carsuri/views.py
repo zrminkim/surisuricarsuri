@@ -10,6 +10,9 @@ import numpy as np
 from tensorflow import keras
 from keras.utils import load_img, img_to_array
 from carsuri.car_json import process_results
+from django.core.files.storage import default_storage
+from datetime import datetime
+import random
 
 def predict_images(model_path, image_folder):
     # 모델 로드
@@ -46,26 +49,33 @@ def predict_images(model_path, image_folder):
 
 # 메인 화면
 def MainFunc(request):
-
     if request.method == 'POST':
-        image_file = request.FILES['image']
-        processed_image = process_image(image_file)
 
-        image_path = os.path.join(settings.MEDIA_ROOT, 'images', image_file.name)
-        with open(image_path, 'wb') as file:
+        base_directory = settings.MEDIA_ROOT
+        folder_name = create_folder(base_directory)
+        print('11111111111111111',folder_name)
+
+        image_files = request.FILES.getlist('image')
+        for image_file in image_files:
+            processed_image = process_image(image_file)
+            image_path = os.path.join(settings.MEDIA_ROOT, folder_name, image_file.name)
+            file_path = default_storage.save(image_path, image_file)
+            print(file_path)
+
+        with open(folder_name, 'wb') as file:
             for chunk in processed_image.chunks():
                 file.write(chunk)
 
             # 모델 파일 경로와 이미지 폴더 경로 설정
             model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel3.h5')
-            image_folder = os.path.join(settings.MEDIA_ROOT, 'images')
+            image_folder = os.path.join(settings.MEDIA_ROOT, folder_name)
             
             # 함수 호출하여 예측 수행
             results = predict_images(model_path, image_folder)
             
             print(results)
             print('---------')
-            car_json = process_results(results)
+            car_json = process_results(results, folder_name)
             print(car_json)
         return render(request, 'predict.html', {'results': car_json})
     else:
@@ -92,3 +102,20 @@ def process_image(image_file):
 
 def index(request):
     return render(request, 'bootstrap/index.html')
+
+def create_folder(base_dir):
+    now = datetime.now()
+    year = now.strftime("%Y")
+    month = now.strftime("%m")
+    day = now.strftime("%d")
+    hour = now.strftime("%H")
+
+    random_number = str(random.randint(1000, 9999))
+
+    folder_name = f"{year}{month}{day}{hour}-{random_number}"
+    folder_path = os.path.join(base_dir, folder_name)
+
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    return folder_name

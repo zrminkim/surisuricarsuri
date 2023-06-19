@@ -74,19 +74,21 @@ img {
 } */
 
 .image-preview {
-  width: 660px;
-  height: 200px;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-/* .image-preview div.row-1 {
-
+.image-container {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
 }
 
-.image-preview div.row-2 {
-
-} */
+@media (min-width: 768px) {
+  .image-container {
+    width: calc(33.33% - 10px);
+  }
+}
 
 /* 스크롤바 */
 @font-face {
@@ -478,11 +480,31 @@ body {
 }
 
 /* 사진 올리기 버튼 */
+.img-input {
+  display: none;
+} /* 기본버튼 감추기 */
+
 .img-btn-16 {
   background-color: #89d8d3;
 background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
   border: none;
   z-index: 1;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  width: 50%;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Helvetica", "Arial", sans-serif;
+  border-radius: 20px;
+  line-height : 50px;
+
 }
 .img-btn-16:after {
   position: absolute;
@@ -511,6 +533,6 @@ background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
   right: 0;
   width: 100%;
 }
-.ing-btn-16:active {
+.img-btn-16:active {
   top: 2px;
 }

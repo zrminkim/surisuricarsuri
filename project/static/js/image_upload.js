@@ -4,6 +4,7 @@ function getImageFiles(e) {
     const uploadFiles = [];
     const files = e.target.files;
     const $imagePreview = $('.image-preview');
+    $imagePreview.empty();
     
     if (files.length + $imagePreview.children().length > 6) {
     // if (uploadFiles.length >= 7) {
@@ -57,8 +58,9 @@ $(document).ready(function () {
     });
 
     // 저장 버튼 클릭 이벤트 핸들러
-    $('.save-button').on('click', function(){
-        const uploadedImages = $('.image-preview .image-container');
+    $('#btn_yes').on('click', function(){
+        alert('견적서를 계산중입니다.')
+        const uploadedImages = $('.image-preview');
         if(uploadedImages.length === 0){
             alert('업로드 된 이미지가 없습니다.');
             return;
@@ -67,5 +69,10 @@ $(document).ready(function () {
             const form = $("#image-up");
             form.submit();
         };
+    });
+    $('#btn_no').on('click', function(){
+        alert('다시 이용해주시기 바랍니다.');
+        location.replace('/')
+        
     });
 });

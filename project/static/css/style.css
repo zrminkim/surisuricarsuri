@@ -102,7 +102,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   height: 30%; /* 스크롤바의 길이 */
-  background: #1ed90dc5; /* 스크롤바의 색상 */
+  background: #f4f803ee; /* 스크롤바의 색상 */
   
   border-radius: 10px;
 }
@@ -193,11 +193,37 @@ a {
 
 /* fade-in Animation */
 .fade-in-box {
-  display: inline-block;
+  /* display: inline-block; */
+  display: none;
   padding: 10px;
   animation: fadein 3s;
   -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
+
+.fade-in-model {
+  /* display: inline-block; */
+  display: none;
+  padding: 10px;
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+
+.fade-in-detail {
+  /* display: inline-block; */
+  display: none;
+  padding: 10px;
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+
+.fade-in-image {
+  /* display: inline-block; */
+  display: none;
+  padding: 10px;
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+}
+
 @keyframes fadein {
   from {
       opacity: 0;
@@ -213,4 +239,278 @@ a {
   to {
       opacity: 1;
   }
+}
+
+/* 클릭시 동적으로 스크롤 이동 */
+#scroll-move{
+  margin-bottom: 200px;
+}
+
+/* 커스텀 버튼 */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.buttons {
+  margin: 10%;
+  text-align: center;
+}
+
+.btn-hover {
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color-1 {
+  background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+.btn-hover.color-2 {
+  background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+.btn-hover.color-3 {
+  background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+.btn-hover.color-4 {
+  background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+  box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+}
+.btn-hover.color-5 {
+  background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+  box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+.btn-hover.color-6 {
+  background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+  box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+}
+.btn-hover.color-7 {
+  background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+  box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+.btn-hover.color-8 {
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.btn-hover.color-9 {
+  background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+.btn-hover.color-10 {
+      background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+.btn-hover.color-11 {
+      background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
+
+/* 예,아니오 버튼 */
+.button {
+  padding: 1em 1.5em;
+  font-size: 1em;
+  font-weight: 400;
+  font-family: "Helvetica", "Arial", sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.button-first {
+  background: linear-gradient(to right, #e55d87, #5fc3e4);
+  box-shadow: 0 2px 25px rgba(229, 93, 135, 0.5);
+}
+
+.button-first:active {
+  background: linear-gradient(
+    to right,
+    rgba(229, 93, 135, 0.9),
+    rgba(95, 195, 228, 0.9)
+  );
+}
+
+.button-second {
+  background: linear-gradient(to right, #1488cc, #2b32b2);
+  box-shadow: 0 2px 25px rgba(20, 137, 204, 0.5);
+}
+
+.button-second:active {
+  background: linear-gradient(
+    to right,
+    rgba(20, 136, 204, 0.9),
+    rgba(43, 50, 178, 0.9)
+  );
+}
+
+.button:focus {
+  outline: none;
+}
+
+particle {
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  position: fixed;
+  opacity: 0;
+}
+
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 4px;
+  box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #fff;
+  color: #333;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* 견적내기 버튼 */
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+body {
+  margin: 0;
+  height: 100%;
+  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btn span {
+  position: relative; 
+  z-index: 1;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.link {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.link a {
+  color: #000;
+  font-size: 25px; 
+}
+
+/* 사진 올리기 버튼 */
+.img-btn-16 {
+  background-color: #89d8d3;
+background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  border: none;
+  z-index: 1;
+}
+.img-btn-16:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  border-radius: 5px;
+  background-color: #4dccc6;
+  background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+  box-shadow:
+    -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.img-btn-16:hover {
+  color: #fff;
+}
+.img-btn-16:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+.ing-btn-16:active {
+  top: 2px;
 }

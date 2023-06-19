@@ -82,21 +82,10 @@ def ModelFunc(request):
 
 def DetailFunc(request):
     modelId=request.GET.get('modelId')
-    model_detail = Detail.objects.filter(model_num=modelId.replace("maker", ""))
+    model_detail = Detail.objects.filter(model_num=modelId.replace("model", ""))
     serialized_data = serializers.serialize('json', model_detail)
     data = json.loads(serialized_data)
     return JsonResponse(data, safe=False)
-
-# def UploadImage(request):
-#     if request.method == 'POST':
-#         image_file = request.FILES['image']
-#         processed_image = processed_image(image_file)
-
-#         image_path = os.path.join(settings.MEDIA_ROOT, 'images', image_file.name)
-#         with open(image_path, 'wb') as file:
-#             for chunk in processed_image.chunks():
-#                 file.write(chunk)
-#     return render(request, 'main.html')
 
 def process_image(image_file):
     return image_file

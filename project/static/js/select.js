@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    // 화면 새로고침시 상위로 스크롤이 올라감
+    $(window).scrollTop(0);
     // MakerID
     $("button[name='maker']").click(function () {
         let makerId = $(this).attr('id');
@@ -24,7 +26,7 @@ $(document).ready(function () {
                 // 기존 버튼 지우기
                 data.forEach(item => {
                     const button = document.createElement('button');
-                    button.className = "btn btn-danger btn-spacing fade-in-box";
+                    button.className = "btn-hover color-5 btn-spacing fade-in-box";
                     button.id = item.pk;
                     button.value = item.fields.model_name;
                     button.textContent = item.fields.model_name;
@@ -67,7 +69,7 @@ $(document).ready(function () {
                 data.forEach(item => {
                     const detail = document.createElement('button');
                     
-                    detail.className = "btn btn-warning btn-spacing fade-in-box";
+                    detail.className = "btn-hover color-6 btn-spacing fade-in-model";
                     detail.id = item.pk;
                     detail.value = item.fields.detail_name;
                     detail.textContent = item.fields.detail_name;
@@ -75,7 +77,7 @@ $(document).ready(function () {
                     car_detail.appendChild(detail);
                 });
                 // 새 버튼에 페이드 인 효과 적용
-                $('.fade-in-box').fadeIn();
+                $('.fade-in-model').fadeIn();
             },
             error: function (error) { // 에러 발생시
                 alert(error)
@@ -84,6 +86,19 @@ $(document).ready(function () {
                 // alert('끝')
             }
         })
+    });
+    $("div[name=estimate]").click(function(){
+        $('#maker_hide').show();
+        $("#scroll-move")[0].scrollIntoView({ behaviro: "smooth"});
+    });
+    $("#maker_hide").click(function(){
+        $('#model_hide').show();
+    });
+    $("#model_hide").click(function(){
+        $('#detail_hide').show();
+    });
+    $("#detail_hide").click(function(){
+        $('#image_up_hide').show();
     });
 });
 

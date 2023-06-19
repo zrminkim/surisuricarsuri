@@ -54,20 +54,6 @@ $(document).ready(function () {
 
         // 이미지 업로드 화면 표시
         $('.image-display').show();
-
-        // 동적으로 이미지 업로드 버튼 생성
-        // const $uploadBtn = $('<input>')
-        //     .attr({
-        //         name: 'image',
-        //         type: 'file',
-        //         class: 'real-upload',
-        //         accept: 'image/*',
-        //         multiple: true
-        //     })
-        //     .on('change', getImageFiles);
-
-        //     // 컨테이너에 이미지 업로드 버튼 추가
-        //     $('#detail_model').append($uploadBtn);
     });
 
     // 저장 버튼 클릭 이벤트 핸들러

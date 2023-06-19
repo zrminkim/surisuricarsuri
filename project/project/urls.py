@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.MainFunc),
+    # path('maker/', views.MakerFunc),
     path('model/', views.ModelFunc),
     path('detail/', views.DetailFunc),
     path('predict/', views.predict_images),

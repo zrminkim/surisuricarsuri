@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import MySQLdb
 from carsuri.models import Maker, Model, Detail
 from django.http import JsonResponse
 from django.core import serializers
@@ -12,7 +11,7 @@ from keras.utils import load_img, img_to_array
 from carsuri.car_json import process_results
 from django.core.files.storage import default_storage
 from datetime import datetime
-import random
+from carsuri.estimate import estFunc
 
 def predict_images(model_path, image_folder):
     # 모델 로드
@@ -50,10 +49,13 @@ def predict_images(model_path, image_folder):
 # 메인 화면
 def MainFunc(request):
     if request.method == 'POST':
+        maker_num = request.POST.get('maker_est')
+        model_num = request.POST.get('model_est')
+        detail_num = request.POST.get('detail_est')
+        print(detail_num)
 
         base_directory = settings.MEDIA_ROOT
         folder_name = create_folder(base_directory)
-        print('11111111111111111',folder_name)
 
         image_files = request.FILES.getlist('image')
         for image_file in image_files:
@@ -62,9 +64,12 @@ def MainFunc(request):
             file_path = default_storage.save(image_path, image_file)
             print(file_path)
 
-        with open(folder_name, 'wb') as file:
-            for chunk in processed_image.chunks():
-                file.write(chunk)
+        try:
+            with open(folder_name, 'wb') as file:
+                for chunk in processed_image.chunks():
+                    file.write(chunk)
+        except:
+            print('file not found : ', file_path)
 
             # 모델 파일 경로와 이미지 폴더 경로 설정
             model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel3.h5')
@@ -74,8 +79,7 @@ def MainFunc(request):
             results = predict_images(model_path, image_folder)
             
             print(results)
-            print('---------')
-            car_json = process_results(results, folder_name)
+            car_json = process_results(results, folder_name, maker_num, model_num, detail_num)
             print(car_json)
         return render(request, 'predict.html', {'results': car_json})
     else:
@@ -109,10 +113,18 @@ def create_folder(base_dir):
     month = now.strftime("%m")
     day = now.strftime("%d")
     hour = now.strftime("%H")
+    minute = now.strftime("%M")
 
-    random_number = str(random.randint(1000, 9999))
+    minute_folder = os.path.join(base_dir, year, month, day, hour, minute)
+    last_seq_number = 0
 
-    folder_name = f"{year}{month}{day}{hour}-{random_number}"
+    if os.path.exists(minute_folder):
+        subfolders = [f for f in os.listdir(minute_folder) if os.path.isdir(os.path.join(minute_folder, f))]
+        last_seq_number = max([int(f) for f in subfolders], default=0)
+    
+    seq_number = last_seq_number + 1
+    
+    folder_name = f"{year}/{month}/{day}/{hour}/{minute}/{seq_number}"
     folder_path = os.path.join(base_dir, folder_name)
 
     if not os.path.exists(folder_path):

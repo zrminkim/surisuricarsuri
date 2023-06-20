@@ -7,6 +7,8 @@ $(document).ready(function () {
         $('#model').empty();
         $('#detail_model').empty();
         // $("#image-up").empty();
+        $('#maker_est').val(makerId.replace('maker', ''));
+
         $.ajax({
             type: "GET", // GET, POST
             url: "model", // 데이터를 전달할 url
@@ -18,16 +20,18 @@ $(document).ready(function () {
             },
             success: function (data) {
                 console.log(data)
+
                 // alert('성공!')
 
                 // 제조사 클릭시 제조사에 해당하는 자동차 종류 버튼 생성
                 const car_model = document.getElementById('model');
                 car_model.innerHTML = '';
+                
                 // 기존 버튼 지우기
                 data.forEach(item => {
                     const button = document.createElement('button');
                     button.className = "btn-hover color-5 btn-spacing fade-in-box";
-                    button.id = item.pk;
+                    button.id = 'model'+ item.pk;
                     button.value = item.fields.model_name;
                     button.textContent = item.fields.model_name;
                     button.setAttribute('name', 'model');
@@ -41,6 +45,8 @@ $(document).ready(function () {
             },
             complete: function () { // ajax 통기 끝났을 때
                 // alert('끝')
+                $(this).next('.content').slideDown();
+
             }
         })
     });
@@ -49,6 +55,7 @@ $(document).ready(function () {
     $(document).on('click', '#model button', function() {
         let modelId = $(this).attr('id');
         $('#detail_model').empty();
+        $('#model_est').val(modelId.replace('model', ''));
         $.ajax({
             type: "GET", // GET, POST
             url: "detail", // 데이터를 전달할 url
@@ -70,7 +77,7 @@ $(document).ready(function () {
                     const detail = document.createElement('button');
                     
                     detail.className = "btn-hover color-6 btn-spacing fade-in-model";
-                    detail.id = item.pk;
+                    detail.id = 'detail' + item.pk;
                     detail.value = item.fields.detail_name;
                     detail.textContent = item.fields.detail_name;
                     detail.setAttribute('name', 'detail');

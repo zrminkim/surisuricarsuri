@@ -2,7 +2,7 @@ import mysql.connector
 import pandas as pd
 
 # CSV 파일을 데이터프레임으로 읽어오기
-data = pd.read_csv(r'C:\work\psou\pypro03\pack4_deep\카정리.csv', encoding='utf-8')
+data = pd.read_csv(r'C:\Users\ii818\git\surinam3\DB\카정리.csv', encoding='utf-8')
 
 print(data[:10])
 

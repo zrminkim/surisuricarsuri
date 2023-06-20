@@ -61,160 +61,97 @@
     <!-- CSS , js 파일 추가 -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+    <link rel="stylesheet" href="{% static 'css/predict.css' %}">
     <script defer src="static/js/select.js"></script>
     <script defer src="static/js/image_upload.js"></script>
+    <script defer src="static/js/kakaomap.js"></script>
+
+
+    <!-- 카카오 지도 API 사용 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa5651f3dddf30df1b7d0c206b986b58"></script>
+
 </head>
 <body>
-    <div id="predict"></div>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto"></header>
+        
+        <div id="predict"></div>
 
-    <div class="container estimate-container">
-
-    <ul>
-        {% for record in results %}
-            <li>
-                <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
-                <strong>Part:</strong> {{ record.part }}<br>
-                <strong>Repair:</strong> {{ record.repair }}
-            </li>
-            <br>
-        {% endfor %}
-    </ul>
-
-        <div class="estimate-header">
-            <h2>견적서</h2>
-            <p>고객님의 차량 수리 견적서입니다.</p>
-        </div>
-
-        <table class="table estimate-table">
-            <thead>
-                <tr>
-                    <th>구분</th>
-                    <th>부품/작업</th>
-                    <th>수량</th>
-                    <th>단가</th>
-                    <th>금액</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="3">수리</td>
-                    <td>후드 판금</td>
-                    <td>1</td>
-                    <td>300,000</td>
-                    <td>300,000</td>
-                </tr>
-                <tr>
-                    <td>앞범퍼 판금</td>
-                    <td>1</td>
-                    <td>200,000</td>
-                    <td>200,000</td>
-                </tr>
-                <tr>
-                    <td>운전석 도어 판금</td>
-                    <td>1</td>
-                    <td>250,000</td>
-                    <td>250,000</td>
-                </tr>
-                <tr>
-                    <td rowspan="2">교체</td>
-                    <td>후드 교체</td>
-                    <td>1</td>
-                    <td>150,000</td>
-                    <td>150,000</td>
-                </tr>
-                <tr>
-                    <td>앞범퍼 교체</td>
-                    <td>1</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="total-price">총 가격: <span>1,000,000</span>원</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Contact Start -->
-    <div class="container-xxl py-6">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 450px;">
-                    <div class="position-relative h-100">
-                        <iframe class="position-relative w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                        frameborder="0" style="min-height: 450px; border:0;" allowfullscreen="" aria-hidden="false"
-                        tabindex="0"></iframe>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <h6 class="text-primary text-uppercase mb-2">Contact Us</h6>
-                    <h1 class="display-6 mb-4">If You Have Any Query, Please Contact Us</h1>
-                    <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                </div>
+        <ul>
+            {% for record in results %}
+                <li>
+                    <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
+                    <strong>Part:</strong> {{ record.part }}<br>
+                    <strong>Repair:</strong> {{ record.repair }}
+                    <strong>cost:</strong> {{ record.cost }}
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+        <div class="container estimate-container">
+            <div class="estimate-header">
+                <h2>견적서</h2>
+                <p>고객님의 차량 수리 견적서입니다.</p>
             </div>
+
+            <table class="table estimate-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>부품/작업</th>
+                        <th>수량</th>
+                        <th>단가</th>
+                        <th>금액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">수리</td>
+                        <td>후드 판금</td>
+                        <td>1</td>
+                        <td>300,000</td>
+                        <td>300,000</td>
+                    </tr>
+                    <tr>
+                        <td>앞범퍼 판금</td>
+                        <td>1</td>
+                        <td>200,000</td>
+                        <td>200,000</td>
+                    </tr>
+                    <tr>
+                        <td>운전석 도어 판금</td>
+                        <td>1</td>
+                        <td>250,000</td>
+                        <td>250,000</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">교체</td>
+                        <td>후드 교체</td>
+                        <td>1</td>
+                        <td>150,000</td>
+                        <td>150,000</td>
+                    </tr>
+                    <tr>
+                        <td>앞범퍼 교체</td>
+                        <td>1</td>
+                        <td>100,000</td>
+                        <td>100,000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="total-price">총 가격: <span>1,000,000</span>원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br/>
+        
+        <h1>주변 카센터 추천</h1>
+        <div>
+            <div id="map" class="kakaomap-in"></div> 
         </div>
+
+        <footer class="mt-auto text-white-50">
+            <p class="text-white">에이콘 아카데미 강남 3팀. 수리남</p>
+        </footer>
     </div>
-    <!-- Contact End -->
 </body>
-
-<style>
-    .estimate-container {
-        background-color: #f8f9fa;
-        padding: 50px;
-    }
-
-    .estimate-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .estimate-header h2 {
-        color: #343a40;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .estimate-header p {
-        color: #868e96;
-        font-size: 14px;
-        margin-bottom: 0;
-    }
-
-    .estimate-table {
-        width: 100%;
-        margin-bottom: 30px;
-        background-color: #fff;
-        border-radius: 5px;
-    }
-
-    .estimate-table thead th {
-        background-color: #f1f3f5;
-        color: #495057;
-        border-color: #dee2e6;
-        padding: 12px;
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    .estimate-table tbody td {
-        color: #343a40;
-        border-color: #dee2e6;
-        padding: 12px;
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    .total-price {
-        text-align: center;
-        font-weight: bold;
-        margin-top: 30px;
-    }
-
-    .total-price span {
-        font-size: 20px;
-        color: #343a40;
-    }
-</style>
-
 <html>

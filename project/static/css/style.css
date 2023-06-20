@@ -243,8 +243,16 @@ a {
   }
 }
 
-/* 클릭시 동적으로 스크롤 이동 */
-#scroll-move{
+/* 버튼 클릭시 동적으로 스크롤 이동 */
+.scroll-move{
+  margin-bottom: 200px;
+}
+
+.scroll-move1{
+  margin-bottom: 200px;
+}
+
+.scroll-move2{
   margin-bottom: 200px;
 }
 

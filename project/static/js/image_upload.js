@@ -55,6 +55,8 @@ $(document).ready(function () {
 
         // 이미지 업로드 화면 표시
         $('.image-display').show();
+        let detailId = $(this).attr('id');
+        $('#detail_est').val(detailId.replace('detail', ''));
     });
 
     // 저장 버튼 클릭 이벤트 핸들러

@@ -76,79 +76,33 @@
         <header class="mb-auto"></header>
         
         <div id="predict"></div>
+        <div>
+            <h1>요청하신 차량 부위에 대한 견적 내용입니다.</h1>
+            <ul>
+                {% for record in results %}
+                    <li>
+                        <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
+                        <strong>Part:</strong> {{ record.part }}<br>
+                        <strong>Repair:</strong> {{ record.repair }}<br>
+                        <strong>cost:</strong> {{ record.cost }}
+                    </li>
+                    <br>
+                {% endfor %}
+            </ul>
+        </div>
 
-        <ul>
-            {% for record in results %}
-                <li>
-                    <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
-                    <strong>Part:</strong> {{ record.part }}<br>
-                    <strong>Repair:</strong> {{ record.repair }}
-                    <strong>cost:</strong> {{ record.cost }}
-                </li>
-                <br>
-            {% endfor %}
-        </ul>
-        <div class="container estimate-container">
-            <div class="estimate-header">
-                <h2>견적서</h2>
-                <p>고객님의 차량 수리 견적서입니다.</p>
-            </div>
-
-            <table class="table estimate-table">
-                <thead>
-                    <tr>
-                        <th>구분</th>
-                        <th>부품/작업</th>
-                        <th>수량</th>
-                        <th>단가</th>
-                        <th>금액</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="3">수리</td>
-                        <td>후드 판금</td>
-                        <td>1</td>
-                        <td>300,000</td>
-                        <td>300,000</td>
-                    </tr>
-                    <tr>
-                        <td>앞범퍼 판금</td>
-                        <td>1</td>
-                        <td>200,000</td>
-                        <td>200,000</td>
-                    </tr>
-                    <tr>
-                        <td>운전석 도어 판금</td>
-                        <td>1</td>
-                        <td>250,000</td>
-                        <td>250,000</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">교체</td>
-                        <td>후드 교체</td>
-                        <td>1</td>
-                        <td>150,000</td>
-                        <td>150,000</td>
-                    </tr>
-                    <tr>
-                        <td>앞범퍼 교체</td>
-                        <td>1</td>
-                        <td>100,000</td>
-                        <td>100,000</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="total-price">총 가격: <span>1,000,000</span>원</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div><br/>
-        
         <h1>주변 카센터 추천</h1>
         <div>
             <div id="map" class="kakaomap-in"></div> 
         </div>
 
+        <div id="menu_wrap" class="bg_white">
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
+    </div>
+
+    <div>
         <footer class="mt-auto text-white-50">
             <p class="text-white">에이콘 아카데미 강남 3팀. 수리남</p>
         </footer>

@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/cover/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,7 +92,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7 scroll-move">
-                                    <h1 class="display-2 text-light mb-5 animated slideInDown">갑작스러운 접촉사고...<br/> 사진한장만 올리세요</h1>
+                                    <h1 class="display-2 text-light mb-5 animated slideInDown"><br/><br/><br/><br/>갑작스러운 접촉사고...<br/> 사진한장만 올리세요</h1>
                                     <div class="btn" name="estimate"><span>견적내기</span></div>
                                 </div>
                             </div>
@@ -104,7 +105,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
-                                    <h1 class="display-2 text-light mb-5 animated slideInDown">차에 스크래치가 생기셨나요? 수리비가 걱정되신다면..</h1>
+                                    <h1 class="display-2 text-light mb-5 animated slideInDown"><br/>차에 스크래치가 생기셨나요? 수리비가 걱정되신다면..</h1>
                                     <div class="btn" name="estimate"><span>견적내기</span></div>
                                 </div>
                             </div>
@@ -140,19 +141,18 @@
                     <div class="h-100">
                         <h6 class="text-primary text-uppercase mb-2">소개</h6>
                         <h1 class="display-6 mb-4">차량이 긁히거나 파손이 있을경우 사진 한장으로 간단하게 예상 견적서를 확인해보세요!</h1>
-                        <p class="mb-4">우리가 개발에 사용한 기술들입니다</p>
                         <div class="row g-2 mb-4 pb-2">
                             <div class="col-sm-6">
-                                <i class="fa fa-check text-primary me-2"></i>파이썬
+                                <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa fa-check text-primary me-2"></i>데이터분석
+                                <i class="fa fa-check text-primary me-2"></i>본인의 실수로 사고를 내셨는데 보험 처리시 보험료 인상금액이 걱정되시나요?
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa fa-check text-primary me-2"></i>장고
+                                <i class="fa fa-check text-primary me-2"></i>차에 흠집이 생겼는데 수리비가 얼마인지 궁금하신가요?
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa fa-check text-primary me-2"></i>그리고 부트스트랩
+                                <i class="fa fa-check text-primary me-2"></i>자연재해로 인해 임시로 본인의 돈으로 수리하셔야 하나요?
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,6 @@
                 <div id="detail_model"></div>
             </div>
             
-            {% comment %} <div class="image-display"> {% endcomment %}
             <div class="fade-in-image" id="image_up_hide">
                 <form id="image-up" name="image-up" method="post" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" name="maker_est" id="maker_est"/>

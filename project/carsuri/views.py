@@ -52,7 +52,7 @@ def MainFunc(request):
         maker_num = request.POST.get('maker_est')
         model_num = request.POST.get('model_est')
         detail_num = request.POST.get('detail_est')
-        print(detail_num)
+        # print(detail_num)
 
         base_directory = settings.MEDIA_ROOT
         folder_name = create_folder(base_directory)
@@ -62,25 +62,26 @@ def MainFunc(request):
             processed_image = process_image(image_file)
             image_path = os.path.join(settings.MEDIA_ROOT, folder_name, image_file.name)
             file_path = default_storage.save(image_path, image_file)
-            print(file_path)
+            # print(file_path)
 
         try:
             with open(folder_name, 'wb') as file:
                 for chunk in processed_image.chunks():
                     file.write(chunk)
         except:
-            print('file not found : ', file_path)
+            # print('file not found : ', file_path)
 
             # 모델 파일 경로와 이미지 폴더 경로 설정
-            model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel3.h5')
+            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel3.h5')
+            model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel_4part_0620.h5')
             image_folder = os.path.join(settings.MEDIA_ROOT, folder_name)
             
             # 함수 호출하여 예측 수행
             results = predict_images(model_path, image_folder)
             
-            print(results)
+            # print(results)
             car_json = process_results(results, folder_name, maker_num, model_num, detail_num)
-            print(car_json)
+            # print(car_json)
         return render(request, 'predict.html', {'results': car_json})
     else:
 

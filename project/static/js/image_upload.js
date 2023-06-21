@@ -7,8 +7,8 @@ function getImageFiles(e) {
     $imagePreview.empty();
     
     if (files.length + $imagePreview.children().length > 6) {
-    // if (uploadFiles.length >= 7) {
         alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+        
         return;
     }
     
@@ -20,7 +20,6 @@ function getImageFiles(e) {
         }
     
         // 파일 갯수 검사
-        // if (files.length < 7) {
         if ($imagePreview.children().length >= 6) {
             alert('최대 6개의 이미지만 업로드가 가능합니다.');
             return;
@@ -33,7 +32,6 @@ function getImageFiles(e) {
         };
         reader.readAsDataURL(file);
     });
-    
 }
 
 function createJQueryElement(e, file) {
@@ -62,9 +60,14 @@ $(document).ready(function () {
     // 저장 버튼 클릭 이벤트 핸들러
     $('#btn_yes').on('click', function(){
         alert('견적서를 계산중입니다.')
-        const uploadedImages = $('.image-preview');
+        const uploadedImages = $('.image-container');
+        console.log($('.image-container').length)
         if(uploadedImages.length === 0){
             alert('업로드 된 이미지가 없습니다.');
+            return;
+        }
+        else if(uploadedImages.length >= 7){
+            alert('이미지가 너무 많습니다. 6개 이하만 올려주세요');
             return;
         }
         else{

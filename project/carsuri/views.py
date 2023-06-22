@@ -76,9 +76,9 @@ def MainFunc(request):
             # print('file not found : ', file_path)
 
             # 모델 파일 경로와 이미지 폴더 경로 설정
-            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/cnnModel3.h5')
-            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/cnnModel_4part_0620.h5')
-            model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/mobilenetV3_4part_gray_edge5_0621.h5')
+            # model_path = os.path.join('carsuri/model/cnnModel3.h5')
+            # model_path = os.path.join('carsuri/model/cnnModel_4part_0620.h5')
+            model_path = os.path.join('carsuri/model/mobilenetV3_4part_gray_edge5_0621.h5')
             image_folder = os.path.join(settings.MEDIA_ROOT, folder_name)
             
             # 함수 호출하여 예측 수행
@@ -146,6 +146,7 @@ def MapFunc(request):
     northeast_latitude = request.GET.get('neLat')
     northeast_longitude = request.GET.get('neLng')
     
+    # 현재 위치 되어 있는 네 곳의 위도 경도 사이의 값만 가져옴 
     result = Map.objects.filter(
         Q(latitude__gte=southwest_latitude) &
         Q(latitude__lte=northeast_latitude) &

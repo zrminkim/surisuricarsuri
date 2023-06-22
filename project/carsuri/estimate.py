@@ -3,6 +3,7 @@ import pandas as pd
 from django.db.models import Avg
 from carsuri.models import RepairCost, ExchangeCost
 import math
+import random
 
 def convert_part_name(part):
     if part == '사이드 미러':
@@ -42,7 +43,16 @@ def repairFunc(maker_num, model_num, detail_num, damage, part):
         df = pd.DataFrame(data, columns=['cost','repair'])
         filtered_df = df[df['repair'].str.contains(part)]
         if filtered_df.empty:
-            cost = 0
+            if part == 'Side mirror':
+                cost = random.randint(30000, 100000)
+            elif part == 'Front bumper':
+                cost = random.randint(100000, 300000)
+            elif part == 'Wheel':
+                cost = random.randint(50000, 250000)
+            elif part == 'Rear bumper':
+                cost = random.randint(100000, 300000)
+            else:
+                cost = 0
         else : 
             cost = filtered_df['cost'].mean()
     else : 
@@ -75,13 +85,24 @@ def exchangeFunc(maker_num, model_num, detail_num, damage, part):
     
     if filtered_df.empty:
         data = ExchangeCost.objects.filter(maker_num=maker_num, model_num=model_num)
-        data = [(exchange_cost.cost, exchange_cost.repair) for exchange_cost in data]
+        data = [(exchange_cost.cost, exchange_cost.exchange) for exchange_cost in data]
     
         # Pandas DataFrame 생성
         df = pd.DataFrame(data, columns=['cost','exchange'])
         filtered_df = df[df['exchange'].str.contains(part)]
         if filtered_df.empty:
-            cost = 0
+            if part == 'Side mirror':
+                cost = random.randint(50000, 150000)
+            elif part == 'Front bumper':
+                cost = random.randint(300000, 600000)
+            elif part == 'Wheel':
+                cost = random.randint(150000, 400000)
+            elif part == 'Rear bumper':
+                cost = random.randint(300000, 600000)
+            else:
+                cost = 0
+
+            
         else : cost = filtered_df['cost'].mean()
     else : 
         cost = filtered_df['cost'].mean()

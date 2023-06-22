@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ko" class="h-100">
+<html lang="ko">
 <head>
     <title>수리남 - 카수리</title>
     <meta charset="utf-8">
@@ -152,7 +152,7 @@
                                 <i class="fa fa-check text-primary me-2"></i>차에 흠집이 생겼는데 수리비가 얼마인지 궁금하신가요?
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa fa-check text-primary me-2"></i>자연재해로 인해 임시로 본인의 돈으로 수리하셔야 하나요?
+                                <i class="fa fa-check text-primary me-2"></i>자연재해로 인해 본인의 돈으로 임시적으로 수리하셔야 하나요?
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                 <div id="detail_model"></div>
             </div>
             
-            <div class="fade-in-image" id="image_up_hide">
+            <div class="fade-in-image buttons" id="image_up_hide">
                 <form id="image-up" name="image-up" method="post" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" name="maker_est" id="maker_est"/>
                     <input type="hidden" name="model_est" id="model_est"/>
@@ -200,8 +200,10 @@
             </div>
             <div class="yes-no-display">
                 <h2>위의 차량이 선택한 차량이 맞습니까?</h2>
-                <button class="button button-first" id="btn_yes" data-type="square">예</button>&nbsp;
-                <button class="button button-second" id="btn_no" data-type="circle">아니오</button>&nbsp;
+                <div class="buttons">
+                    <button class="button button-first" id="btn_yes" data-type="square">예</button>&nbsp;
+                    <button class="button button-second" id="btn_no" data-type="circle">아니오</button>&nbsp;
+                </div>
             </div>
         </div>
 

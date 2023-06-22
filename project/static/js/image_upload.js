@@ -5,7 +5,7 @@ function getImageFiles(e) {
     const files = e.target.files;
     const $imagePreview = $('.image-preview');
     $imagePreview.empty();
-    
+
     if (files.length + $imagePreview.children().length > 6) {
         alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
         
@@ -32,6 +32,7 @@ function getImageFiles(e) {
         };
         reader.readAsDataURL(file);
     });
+    $('html, body').animate({ scrollTop: $(document).height() }, 300);
 }
 
 function createJQueryElement(e, file) {
@@ -55,6 +56,17 @@ $(document).ready(function () {
         $('.image-display').show();
         let detailId = $(this).attr('id');
         $('#detail_est').val(detailId.replace('detail', ''));
+        $('#image_up_hide').show();
+
+        // 버튼 클릭시 화면이 하단으로 이동
+        var $button = $(this);
+        var $parentContainer = $button.parent();
+        var $lastButton = $parentContainer.children().last();
+
+        // 버튼 위치로 스크롤?
+        $('html, body').animate({
+            scrollTop: $lastButton.offset().top
+        }, 300);
     });
 
     // 저장 버튼 클릭 이벤트 핸들러

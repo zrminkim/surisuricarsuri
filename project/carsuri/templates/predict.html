@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ko" class="h-100">
+<html lang="ko">
 <head>
     <title>frontend</title>
     <meta charset="utf-8">
@@ -73,21 +73,19 @@
 </head>
 <body>
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto"></header>
         
         <div id="predict"></div>
         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="h-100">
+            <div>
                 <h1 class="display-6 mb-4">요청하신 차량 부위에 대한 견적 내용입니다.</h1>
                 <div class="row g-2 mb-4 pb-2">
-                    <div class="col-sm-6">
-                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
-                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
-                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
-                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
+                    <div class="row-cols-sm-auto">
+                        <h5><i class="bi bi-dice-1 text-primary me-3"></i>견적으로 인한 가격이 실제 견적과 다를 수 있습니다.</h5><br/>
+                        <h5><i class="bi bi-dice-2 text-primary me-3"></i>본인이 선택한 차종이랑 다른 차종의 사진일 경우 가격이 다를 수 있습니다.</h5><br/>
+                        <h5><i class="bi bi-dice-3 text-primary me-3"></i>차량이 아닌 다른 사진을 올리셨을 경우 견적이 나올 수도 있습니다.</h5><br/>
                     </div>
 
-                    <ul>
+                    <ul class="image-preview">
                         {% for record in results %}
                             <li>
                                 <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
@@ -105,14 +103,14 @@
         <h1>주변 카센터 추천</h1>
         <div>
             <div id="map" class="kakaomap-in"></div> 
-            <p id="result"></p>
+            <div id="info" class="info"></div>
         </div>
-    </div>
 
-    <div>
-        <footer class="mt-auto text-white-50">
-            <p class="text-white">에이콘 아카데미 강남 3팀. 수리남</p>
-        </footer>
+        <div>
+            <footer class="mt-auto text-white-50">
+                <p class="text-white">에이콘 아카데미 강남 3팀. 수리남</p>
+            </footer>
+        </div>
     </div>
 </body>
 <html>

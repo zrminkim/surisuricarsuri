@@ -7,6 +7,7 @@ $(document).ready(function () {
         $('#model').empty();
         $('#detail_model').empty();
         $('#maker_est').val(makerId.replace('maker', ''));
+        $('#model_hide').show();
 
         // 버튼 클릭시 화면이 하단으로 이동
         var $button = $(this);
@@ -63,6 +64,7 @@ $(document).ready(function () {
         let modelId = $(this).attr('id');
         $('#detail_model').empty();
         $('#model_est').val(modelId.replace('model', ''));
+        $('#detail_hide').show();
 
         // 버튼 클릭시 화면이 하단으로 이동
         var $button = $(this);
@@ -112,18 +114,10 @@ $(document).ready(function () {
             }
         })
     });
+
     $("div[name=estimate]").click(function(){
         $('#maker_hide').show();
         $("#scroll-move")[0].scrollIntoView({ behaviro: "smooth"});
-    });
-    $("#maker_hide").click(function(){
-        $('#model_hide').show();
-    });
-    $("#model_hide").click(function(){
-        $('#detail_hide').show();
-    });
-    $("#detail_hide").click(function(){
-        $('#image_up_hide').show();
     });
 });
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from carsuri.models import Maker, Model, Detail
+from carsuri.models import Maker, Model, Detail, Map
 from django.http import JsonResponse
 from django.core import serializers
 import json
@@ -11,19 +11,23 @@ from keras.utils import load_img, img_to_array
 from carsuri.car_json import process_results
 from django.core.files.storage import default_storage
 from datetime import datetime
-from carsuri.estimate import estFunc
+from django.db.models import Q
+from django.core.serializers import serialize
+from django.http import HttpResponse
 
 def predict_images(model_path, image_folder):
     # 모델 로드
     model = keras.models.load_model(model_path)
     # 클래스 맵핑 설정
     class_mapping = {
-        0: 'Front bumper_s',
-        1: 'Front_bumper_c',
-        2: 'Side mirror_c',
-        3: 'Side mirror_s',
-        4: 'Wheel_c',
-        5: 'Wheel_s'
+        0: 'Front_bumper_c',
+        1: 'Front_bumper_s',
+        2: 'Rear_bumper_c',
+        3: 'Rear_bumper_s',
+        4: 'Side_mirror_c',
+        5: 'Side_mirror_s',
+        6: 'Wheel_c',
+        7: 'Wheel_s',
     }
 
     # 예측 결과를 저장할 딕셔너리
@@ -72,14 +76,14 @@ def MainFunc(request):
             # print('file not found : ', file_path)
 
             # 모델 파일 경로와 이미지 폴더 경로 설정
-            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel3.h5')
-            model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/cnnModel_4part_0620.h5')
+            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/cnnModel3.h5')
+            # model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/cnnModel_4part_0620.h5')
+            model_path = os.path.join('c:/Users/ii818/git/surinam3/project/carsuri/model/mobilenetV3_4part_gray_edge5_0621.h5')
             image_folder = os.path.join(settings.MEDIA_ROOT, folder_name)
             
             # 함수 호출하여 예측 수행
             results = predict_images(model_path, image_folder)
-            
-            # print(results)
+            # print(results, 'aaaaaaaa')
             car_json = process_results(results, folder_name, maker_num, model_num, detail_num)
             # print(car_json)
         return render(request, 'predict.html', {'results': car_json})
@@ -88,6 +92,7 @@ def MainFunc(request):
         datas = Maker.objects.all()
         return render(request, 'main.html', {'maker':datas})
     
+    # Maker 버튼을 누르면 Model 버튼을 호출 시키는 매핑작업
 def ModelFunc(request):
     makerId=request.GET.get('makerId')
     car_Model = Model.objects.filter(maker_num=makerId.replace("maker", ""))
@@ -95,6 +100,7 @@ def ModelFunc(request):
     data = json.loads(serialized_data)
     return JsonResponse(data, safe=False)
 
+    # Model 버튼을 누르면 Detail 버튼을 호출 시키는 매핑작업
 def DetailFunc(request):
     modelId=request.GET.get('modelId')
     model_detail = Detail.objects.filter(model_num=modelId.replace("model", ""))
@@ -105,9 +111,7 @@ def DetailFunc(request):
 def process_image(image_file):
     return image_file
 
-def index(request):
-    return render(request, 'bootstrap/index.html')
-
+    # 이미지 파일 저장 할 때 자동적으로 년/월/일/시/분/1~...번호의 폴더 생성 후 이미지 저장
 def create_folder(base_dir):
     now = datetime.now()
     year = now.strftime("%Y")
@@ -132,3 +136,22 @@ def create_folder(base_dir):
         os.makedirs(folder_path)
 
     return folder_name
+
+def MapFunc(request):
+
+    # center_lat = 37.4987846719974
+    # center_lng = 127.031703595662
+    southwest_latitude = request.GET.get('swLat')
+    southwest_longitude = request.GET.get('swLng')
+    northeast_latitude = request.GET.get('neLat')
+    northeast_longitude = request.GET.get('neLng')
+    
+    result = Map.objects.filter(
+        Q(latitude__gte=southwest_latitude) &
+        Q(latitude__lte=northeast_latitude) &
+        Q(longitude__gte=southwest_longitude) &
+        Q(longitude__lte=northeast_longitude)
+    )
+    json_data = serialize('json', result)
+
+    return HttpResponse(json_data, content_type='application/json')

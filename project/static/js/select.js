@@ -6,8 +6,17 @@ $(document).ready(function () {
         let makerId = $(this).attr('id');
         $('#model').empty();
         $('#detail_model').empty();
-        // $("#image-up").empty();
         $('#maker_est').val(makerId.replace('maker', ''));
+
+        // 버튼 클릭시 화면이 하단으로 이동
+        var $button = $(this);
+        var $parentContainer = $button.parent();
+        var $lastButton = $parentContainer.children().last();
+    
+        // 버튼 위치로 스크롤?
+        $('html, body').animate({
+            scrollTop: $lastButton.offset().top
+        }, 300);
 
         $.ajax({
             type: "GET", // GET, POST
@@ -45,8 +54,6 @@ $(document).ready(function () {
             },
             complete: function () { // ajax 통기 끝났을 때
                 // alert('끝')
-                $(this).next('.content').slideDown();
-
             }
         })
     });
@@ -56,6 +63,17 @@ $(document).ready(function () {
         let modelId = $(this).attr('id');
         $('#detail_model').empty();
         $('#model_est').val(modelId.replace('model', ''));
+
+        // 버튼 클릭시 화면이 하단으로 이동
+        var $button = $(this);
+        var $parentContainer = $button.parent();
+        var $lastButton = $parentContainer.children().last();
+    
+        // 버튼 위치로 스크롤?
+        $('html, body').animate({
+            scrollTop: $lastButton.offset().top
+        }, 300);
+        
         $.ajax({
             type: "GET", // GET, POST
             url: "detail", // 데이터를 전달할 url

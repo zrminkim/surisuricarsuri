@@ -60,9 +60,32 @@ class RepairCost(models.Model):
     model_num = models.ForeignKey(Model, models.DO_NOTHING, db_column='model_num', blank=True, null=True)
     detail_num = models.ForeignKey(Detail, models.DO_NOTHING, db_column='detail_num', blank=True, null=True)
     cost = models.IntegerField(blank=True, null=True)
-    exchange = models.CharField(max_length=255, blank=True, null=True)
     repair = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'repair_cost'
+
+class ExchangeCost(models.Model):
+    exchange_cost_no = models.AutoField(primary_key=True)
+    maker_num = models.ForeignKey('Maker', models.DO_NOTHING, db_column='maker_num', blank=True, null=True)
+    model_num = models.ForeignKey('Model', models.DO_NOTHING, db_column='model_num', blank=True, null=True)
+    detail_num = models.ForeignKey(Detail, models.DO_NOTHING, db_column='detail_num', blank=True, null=True)
+    cost = models.IntegerField(blank=True, null=True)
+    exchange = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'exchange_cost'
+
+class Map(models.Model):
+    map_no = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    addr = models.CharField(max_length=255, blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    tel = models.CharField(max_length=13, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'map'

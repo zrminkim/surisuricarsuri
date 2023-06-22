@@ -1,7 +1,8 @@
 from django.shortcuts import render
 import pandas as pd
 from django.db.models import Avg
-from carsuri.models import RepairCost
+from carsuri.models import RepairCost, ExchangeCost
+import math
 
 def convert_part_name(part):
     if part == '사이드 미러':
@@ -15,37 +16,77 @@ def convert_part_name(part):
     else:
         return None
 
-def estFunc(maker_num, model_num, detail_num, damage, part):
-    
-    # maker_num = 1;
-    # model_num = 1;
-    # detail_num = 55;
+def repairFunc(maker_num, model_num, detail_num, damage, part):
+    maker_num = maker_num;
+    model_num = model_num;
+    detail_num = detail_num;
+    damage = damage
+    part=part
 
-    # 예시 사용
-    part = convert_part_name(part)
+    part=convert_part_name(part)
     print(part)
-
-    damage = 'repair' # repair or exchange
     data = RepairCost.objects.filter(maker_num=maker_num, model_num=model_num, detail_num=detail_num)
-    df = pd.DataFrame(list(data.values()))
     
-    if damage == 'repair':
-        cost = data.exclude(repair__isnull=True).aggregate(avg_cost=Avg('cost'))['avg_cost']
-    elif damage == 'exchange':
-        cost = data.exclude(exchange__isnull=False).aggregate(avg_cost=Avg('cost'))['avg_cost']
+    # Django 모델 인스턴스를 리스트로 변환
+    data = [(repair_cost.cost, repair_cost.repair) for repair_cost in data]
     
-    if cost == None:
+    # Pandas DataFrame 생성
+    df = pd.DataFrame(data, columns=['cost','repair'])
+    filtered_df = df[df['repair'].str.contains(part)]
+    
+    if filtered_df.empty:
         data = RepairCost.objects.filter(maker_num=maker_num, model_num=model_num)
-        if damage == 'repair':
-            cost = data.exclude(repair__isnull=True).aggregate(avg_cost=Avg('cost'))['avg_cost']
-        elif damage == 'exchange':
-            cost = data.exclude(exchange__isnull=False).aggregate(avg_cost=Avg('cost'))['avg_cost']
-
-    if cost == None:
-        data = RepairCost.objects.filter(maker_num=maker_num)
-        if damage == 'repair':
-            cost = data.exclude(repair__isnull=True).aggregate(avg_cost=Avg('cost'))['avg_cost']
-        elif damage == 'exchange':
-            cost = data.exclude(exchange__isnull=False).aggregate(avg_cost=Avg('cost'))['avg_cost']
+        data = [(repair_cost.cost, repair_cost.repair) for repair_cost in data]
     
-    return cost
+        # Pandas DataFrame 생성
+        df = pd.DataFrame(data, columns=['cost','repair'])
+        filtered_df = df[df['repair'].str.contains(part)]
+        if filtered_df.empty:
+            cost = 0
+        else : 
+            cost = filtered_df['cost'].mean()
+    else : 
+        cost = filtered_df['cost'].mean()
+    cost = math.ceil(cost / 1000) * 1000
+    cost_formatted = "{:,}".format(cost)
+
+    
+    return cost_formatted
+
+
+
+def exchangeFunc(maker_num, model_num, detail_num, damage, part):
+    maker_num = maker_num;
+    model_num = model_num;
+    detail_num = detail_num;
+    damage = damage
+    part=part
+
+    part=convert_part_name(part)
+    print(part)
+    data = ExchangeCost.objects.filter(maker_num=maker_num, model_num=model_num, detail_num=detail_num)
+    
+    # Django 모델 인스턴스를 리스트로 변환
+    data = [(exchange_cost.cost, exchange_cost.exchange) for exchange_cost in data]
+    
+    # Pandas DataFrame 생성
+    df = pd.DataFrame(data, columns=['cost','exchange'])
+    filtered_df = df[df['exchange'].str.contains(part)]
+    
+    if filtered_df.empty:
+        data = ExchangeCost.objects.filter(maker_num=maker_num, model_num=model_num)
+        data = [(exchange_cost.cost, exchange_cost.repair) for exchange_cost in data]
+    
+        # Pandas DataFrame 생성
+        df = pd.DataFrame(data, columns=['cost','exchange'])
+        filtered_df = df[df['exchange'].str.contains(part)]
+        if filtered_df.empty:
+            cost = 0
+        else : cost = filtered_df['cost'].mean()
+    else : 
+        cost = filtered_df['cost'].mean()
+    
+    cost = math.ceil(cost / 1000) * 1000
+    cost_formatted = "{:,}".format(cost)
+    
+    return cost_formatted

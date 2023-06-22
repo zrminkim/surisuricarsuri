@@ -8,9 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.MainFunc),
-    # path('maker/', views.MakerFunc),
     path('model/', views.ModelFunc),
     path('detail/', views.DetailFunc),
     path('predict/', views.predict_images),
-    path('index', views.index),
+    path('map/', views.MapFunc),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

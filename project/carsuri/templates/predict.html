@@ -68,7 +68,7 @@
 
 
     <!-- 카카오 지도 API 사용 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa5651f3dddf30df1b7d0c206b986b58"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa5651f3dddf30df1b7d0c206b986b58&libraries=clusterer"></script>
 
 </head>
 <body>
@@ -76,29 +76,36 @@
         <header class="mb-auto"></header>
         
         <div id="predict"></div>
-        <div>
-            <h1>요청하신 차량 부위에 대한 견적 내용입니다.</h1>
-            <ul>
-                {% for record in results %}
-                    <li>
-                        <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
-                        <strong>Part:</strong> {{ record.part }}<br>
-                        <strong>Repair:</strong> {{ record.repair }}<br>
-                        <strong>cost:</strong> {{ record.cost }}
-                    </li>
-                    <br>
-                {% endfor %}
-            </ul>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="h-100">
+                <h1 class="display-6 mb-4">요청하신 차량 부위에 대한 견적 내용입니다.</h1>
+                <div class="row g-2 mb-4 pb-2">
+                    <div class="col-sm-6">
+                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
+                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
+                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
+                        <i class="fa fa-check text-primary me-2"></i>보험에 가입을 안하셨나요?<br/>
+                    </div>
+
+                    <ul>
+                        {% for record in results %}
+                            <li>
+                                <img src="media/{{record.folder_name}}/{{ record.imgname }}"><br>
+                                <strong>Part:</strong> {{ record.part }}<br>
+                                <strong>Repair:</strong> {{ record.repair }}<br>
+                                <strong>cost:</strong> {{ record.cost }}
+                            </li>
+                            <br>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <h1>주변 카센터 추천</h1>
         <div>
             <div id="map" class="kakaomap-in"></div> 
-        </div>
-
-        <div id="menu_wrap" class="bg_white">
-            <ul id="placesList"></ul>
-            <div id="pagination"></div>
+            <p id="result"></p>
         </div>
     </div>
 

@@ -198,32 +198,32 @@ a {
   /* display: inline-block; */
   display: none;
   padding: 10px;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
 
 .fade-in-model {
   /* display: inline-block; */
   display: none;
   padding: 10px;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
 
 .fade-in-detail {
   /* display: inline-block; */
   display: none;
   padding: 10px;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
 
 .fade-in-image {
   /* display: inline-block; */
   display: none;
   padding: 10px;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  animation: fadein 3s;
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
 
 @keyframes fadein {

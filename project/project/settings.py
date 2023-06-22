@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+import my_settings
 # 다음과 같이 프로젝트 내부에 경로를 빌드합니다: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # 보안 경고: 생산에 사용된 비밀 키를 비밀로 유지하십시오!
-SECRET_KEY = 'django-insecure-@7o+8j71k-3s)=k#5t%g95=n(66sf%hpg2im(8(^_7^*ne3)(9'
+SECRET_KEY = my_settings.SECRET_KEY
 
 # 보안 경고: 프로덕션에서 디버그를 켠 상태로 실행하지 마십시오!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -64,16 +64,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'carsuri', # DB:db는 미리 작성되어있어야 한다.
-        'USER': 'root', # 계정명
-        'PASSWORD': '123', # 계정 암호
-        'HOST': '127.0.0.1', # DB가 설치된 PC의 IP
-        'PORT': '3306', # DBMS의 port 번호
-    }
-}
+DATABASES = my_settings.DATABASES
 
 
 # Password validation

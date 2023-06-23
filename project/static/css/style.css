@@ -78,7 +78,6 @@ img {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 20px;
 }
 
 .image-container {
@@ -88,7 +87,7 @@ img {
 
 @media (min-width: 768px) {
   .image-container {
-    width: calc(33.33% - 10px);
+    width: calc(30% - 10px);
   }
 }
 

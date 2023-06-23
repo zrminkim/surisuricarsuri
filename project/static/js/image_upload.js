@@ -41,10 +41,10 @@ function createJQueryElement(e, file) {
         'src': e.target.result,
         'data-file':file.name
     });
-    const $fileName = $('<span>').text(file.name).addClass('file-name');
+    
 
     $container.append($img);
-    $container.append($fileName);
+    
 
     return $container;
 }
